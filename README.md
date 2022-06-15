@@ -1,8 +1,8 @@
 # HPD-Lidar
-Using gbot_core = Cartographer
+Using gbot_core (Cartographer)
 
 
 
 
 
-have rplidar_ros = Hector SLAM
+have rplidar_ros (Hector SLAM)
