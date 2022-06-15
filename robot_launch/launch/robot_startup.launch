@@ -1,7 +1,0 @@
-<launch>
-    <!-- Checked -->
-    <include file="$(find gbot_core)/launch/gbot.launch" />
-    <!-- Checked -->
-    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
-
-</launch>
