@@ -53,5 +53,5 @@ which ninja &> /dev/null || apt install ninja -y
 catkin_make_isolated --install --use-ninja -DCMAKE_BUILD_TYPE=Release
 
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-echo "source ${hpd_catkin}" >> ~/.bashrc
-source ~/.bashrc
+echo "source ${hpd_catkin}/install_isolated/setup.bash" >> ~/.bashrc
+source ${hpd_catkin}/install_isolated/setup.bash
