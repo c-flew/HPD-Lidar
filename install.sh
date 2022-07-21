@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
 
 if [ $(id -u) -ne 0 ]; then
   echo "Please run as root"
@@ -6,7 +7,7 @@ if [ $(id -u) -ne 0 ]; then
 fi
 
 
-set -eo pipefail
+set -e
 
 # TODO: dont print echo stuff
 set -o xtrace
@@ -49,6 +50,8 @@ cd ..
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y
 
 which ninja &> /dev/null || apt install ninja -y
+
+
 
 catkin_make_isolated --install --use-ninja -DCMAKE_BUILD_TYPE=Release
 
