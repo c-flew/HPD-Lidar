@@ -12,9 +12,12 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
+DEBIAN_FRONTEND=noninteractive
+
+which lsb_release &> /dev/null || apt install lsb-release -y
 dpkg-query -l | grep build-essential || apt install -y build-essential
 
-user=$(logname)
+user=${SUDO_USER:-$(whoami)}
 
 echo "HPD-Lidar: setting up ROS sources"
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
