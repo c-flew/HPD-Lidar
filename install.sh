@@ -52,6 +52,7 @@ git -C cartographer_ros pull || git clone https://github.com/cartographer-projec
 git -C rplidar_ros pull || git clone https://github.com/slamtec/rplidar_ros
 git -C gbot_core pull || git clone https://github.com/Andrew-rw/gbot_core
 
+cp rplidar_ros/scripts/rplidar.rules /etc/udev/rules.d
 mkdir -p gbot_core/param
 
 which ninja &> /dev/null || apt install ninja-build -y
