@@ -1,4 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+
+set -e
+
+# TODO: dont print echo stuff
+set -o xtrace
 
 
 if [ $(id -u) -ne 0 ]; then
@@ -6,11 +12,7 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
-
-set -e
-
-# TODO: dont print echo stuff
-set -o xtrace
+user=$(logname)
 
 echo "HPD-Lidar: setting up ROS sources"
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -24,37 +26,44 @@ apt update
 
 echo "HPD-Lidar: installing ros noetic"
 # TODO: check how bare bones we can get in the future
-apt install ros-noetic-desktop-full
+apt install -y ros-noetic-desktop
 
 source /opt/ros/noetic/setup.bash
 
-apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
-rosdep init
+[ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
 rosdep update
 
 
-hpd_catkin="${HPD_CATKIN_WS_DIR:-~/hpd_catkin_ws}"
+hpd_catkin="${HPD_CATKIN_WS_DIR:-/home/$user/hpd_catkin_ws}"
 echo "HPD-Lidar: using catkin ws directory: ${hpd_catkin}"
 mkdir -p $hpd_catkin/src && cd $hpd_catkin/src
 
 which git &> /dev/null || apt install git -y
 
-git clone https://github.com/cartographer-project/cartographer_ros
-git clone https://github.com/cartographer-project/cartographer
-git clone https://github.com/slamtec/rplidar_ros
-git clone https://github.com/Andrew-rw/gbot_core
+git -C cartographer pull || git clone https://github.com/cartographer-project/cartographer
+git -C cartographer_ros pull || git clone https://github.com/cartographer-project/cartographer_ros
+git -C rplidar_ros pull || git clone https://github.com/slamtec/rplidar_ros
+git -C gbot_core pull || git clone https://github.com/Andrew-rw/gbot_core
+
+which ninja &> /dev/null || apt install ninja-build -y
 
 cd ..
+#rm -rf abseil-cpp
+#sh src/cartographer/scripts/install_abseil.sh
 
-rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y
+rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y -r
+catkin_make_isolated --install --install-space --use-ninja ./install -DCMAKE_BUILD_TYPE=Release
+cd ..
 
-which ninja &> /dev/null || apt install ninja -y
 
 
 
-catkin_make_isolated --install --use-ninja -DCMAKE_BUILD_TYPE=Release
+
 
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 echo "source ${hpd_catkin}/install_isolated/setup.bash" >> ~/.bashrc
 source ${hpd_catkin}/install_isolated/setup.bash
+
+chown -R "$user" "$hpd_catkin"
