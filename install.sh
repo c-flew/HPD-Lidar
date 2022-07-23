@@ -12,6 +12,8 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
+dpkg-query -l | grep build-essential || apt install -y build-essential
+
 user=$(logname)
 
 echo "HPD-Lidar: setting up ROS sources"
@@ -51,6 +53,7 @@ mkdir -p gbot_core/param
 
 which ninja &> /dev/null || apt install ninja-build -y
 which stow &> /dev/null || apt install stow -y
+which cmake &> /dev/null || apt install cmake -y
 
 cd ..
 rm -rf abseil-cpp
