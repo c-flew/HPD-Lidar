@@ -47,23 +47,25 @@ git -C cartographer_ros pull || git clone https://github.com/cartographer-projec
 git -C rplidar_ros pull || git clone https://github.com/slamtec/rplidar_ros
 git -C gbot_core pull || git clone https://github.com/Andrew-rw/gbot_core
 
+mkdir -p gbot_core/param
+
 which ninja &> /dev/null || apt install ninja-build -y
+which stow &> /dev/null || apt install stow -y
 
 cd ..
-#rm -rf abseil-cpp
-#sh src/cartographer/scripts/install_abseil.sh
+rm -rf abseil-cpp
+sh src/cartographer/scripts/install_abseil.sh
+
+apt install google-mock libgmock-dev -y
 
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y -r
-catkin_make_isolated --install --install-space --use-ninja ./install -DCMAKE_BUILD_TYPE=Release
+catkin_make_isolated --install --install-space ./install --use-ninja -DCMAKE_BUILD_TYPE=Release
 cd ..
 
 
-
-
-
-
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-echo "source ${hpd_catkin}/install_isolated/setup.bash" >> ~/.bashrc
-source ${hpd_catkin}/install_isolated/setup.bash
+touch ~/.bashrc
+grep -qxF "source /opt/ros/noetic/setup.bash" ~/.bashrc || echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+grep -qx "source ${hpd_catkin}/install/setup.bash" ~/.bashrc || echo "source ${hpd_catkin}/install/setup.bash" >> ~/.bashrc
+source ${hpd_catkin}/install/setup.bash
 
 chown -R "$user" "$hpd_catkin"
