@@ -1,0 +1,40 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-focal
+
+    steps:
+    - name: Checkout
+    - uses: actions/checkout@v3
+      #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+    - name: Login to Docker Hub          
+    - uses: docker/login-action@v2          
+      with:            
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}  
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}  
+        
+    - name: Docker Setup Buildx
+    - uses: docker/setup-buildx-actions@v2
+    
+    - name: Docker Setup QEMU
+    - uses: docker/setup-qemu-action@v2
+      with:
+        platforms: arm64
+    
+    - name: Build and Push
+    - uses: docker/build-push-action@v3.1.0
+      with:
+        file: ./Dockerfile
+        push: true
+        platforms: arm64
+        tags: hpdlidar/lidar:latest
