@@ -12,7 +12,8 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
-DEBIAN_FRONTEND=noninteractive
+TMP_DF=$DEBIAN_FRONTEND
+export DEBIAN_FRONTEND=noninteractive
 
 which lsb_release &> /dev/null || apt install lsb-release -y
 dpkg-query -l | grep build-essential || apt install -y build-essential
@@ -76,3 +77,4 @@ grep -qx "source ${hpd_catkin}/install/setup.bash" ~/.bashrc || echo "source ${h
 source ${hpd_catkin}/install/setup.bash
 
 chown -R "$user" "$hpd_catkin"
+export DEBIAN_FRONTEND=$TMP_DF
