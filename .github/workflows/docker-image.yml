@@ -3,14 +3,21 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+      - 'install.sh'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+      - 'install.sh'
 
 jobs:
 
   build:
 
     runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, 'ci skip di')"
     environment: lidar
 
     steps:
