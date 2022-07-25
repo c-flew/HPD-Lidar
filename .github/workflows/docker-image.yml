@@ -5,12 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'Dockerfile'
-      - 'install.sh'
+      - 'scripts/install.sh'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'Dockerfile'
-      - 'install.sh'
+      - 'scripts/install.sh'
 
 jobs:
 

@@ -23,7 +23,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
 USER $USER
 WORKDIR /home/$USER
 
-ADD ./install.sh install.sh
+ADD ./scripts/install.sh install.sh
 RUN sudo bash install.sh
 
 CMD ["roslaunch", "gbot_core", "gbot.launch"]

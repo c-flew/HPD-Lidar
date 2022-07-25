@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'setup.sh'
+      - 'scripts/setup.sh'
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'setup.sh'
+      - 'scripts/setup.sh'
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,4 @@ jobs:
     steps:
     - name: Setup
       shell: bash
-      run: |
-        find .
-        chmod +x "${GITHUB_WORKSPACE}/setup.sh"
-        "${GITHUB_WORKSPACE}/setup.sh"
+      run: scripts/setup.sh
