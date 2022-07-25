@@ -16,4 +16,6 @@ jobs:
     steps:
     - name: Setup
       shell: bash
-      run: ./setup.sh
+      run: |
+        chmod +x "${GITHUB_WORKSPACE}/setup.sh"
+        "${GITHUB_WORKSPACE}/setup.sh"
