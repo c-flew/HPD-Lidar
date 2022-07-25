@@ -36,5 +36,5 @@ jobs:
       with:
         file: ./Dockerfile
         push: true
-        platforms: arm64
+        platforms: linux/arm64
         tags: hpdlidar/lidar:latest
