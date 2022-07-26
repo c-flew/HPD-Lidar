@@ -7,6 +7,13 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
+which git &> /dev/null || apt install git -y
+
+git clone https://github.com/c-flew/HPD-Lidar
+chmod +x HPD-Lidar/scripts/*.sh
+
+which uhubctl &> /dev/null || apt install uhubctl -y
+
 apt install -y docker.io containerd runc
 
 source /etc/os-release

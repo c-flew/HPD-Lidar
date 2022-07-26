@@ -25,6 +25,7 @@ sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /
 
 echo "HPD-Lidar: adding keys"
 which curl &> /dev/null || apt install curl -y
+which git &> /dev/null || apt install git -y
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
 echo "HPD-Lidar: updating repos"
@@ -77,4 +78,6 @@ grep -qx "source ${hpd_catkin}/install/setup.bash" ~/.bashrc || echo "source ${h
 source ${hpd_catkin}/install/setup.bash
 
 chown -R "$user" "$hpd_catkin"
+
+which uhubctl &> /dev/null || apt install uhubctl -y
 export DEBIAN_FRONTEND=$TMP_DF
