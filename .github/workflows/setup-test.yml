@@ -25,4 +25,4 @@ jobs:
     
     - name: Setup
       shell: bash
-      run: sudo ./scripts/setup.sh
+      run: sudo bash scripts/setup.sh
