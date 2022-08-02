@@ -26,4 +26,4 @@ WORKDIR /home/$USER
 ADD ./scripts/install.sh install.sh
 RUN sudo bash install.sh
 
-CMD ["roslaunch", "gbot_core", "gbot.launch"]
+CMD ["bash", "-c", "roslaunch", "gbot_core", "gbot.launch"]
