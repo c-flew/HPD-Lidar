@@ -7,19 +7,25 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
+user=${SUDO_USER:-${whoami}}
+
 which git &> /dev/null || apt install git -y
 
-git clone https://github.com/c-flew/HPD-Lidar
+git -C HPD-Lidar pull || git clone https://github.com/c-flew/HPD-Lidar
 chmod +x HPD-Lidar/scripts/*.sh
+chown -R "$user" HPD-Lidar
 
 which uhubctl &> /dev/null || apt install uhubctl -y
 
 apt install -y docker.io containerd runc
 
-source /etc/os-release
-sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-
-wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
+if search=$(awk -F= '/^NAME/{print $2}' /etc/os-release | grep -i "ubuntu"); then
+  source /etc/os-release
+  sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+  wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
+else
+  apt install -y podman 
+fi
 
 apt update
 apt install -y podman
