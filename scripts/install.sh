@@ -73,8 +73,8 @@ cd ..
 
 
 touch ~/.bashrc
-grep -qxF "source /opt/ros/noetic/setup.bash" ~/.bashrc || echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-grep -qx "source ${hpd_catkin}/install/setup.bash" ~/.bashrc || echo "source ${hpd_catkin}/install/setup.bash" >> ~/.bashrc
+grep -qxF "source /opt/ros/noetic/setup.bash" /home/$user/.bashrc || echo "source /opt/ros/noetic/setup.bash" >> /home/$user/.bashrc
+grep -qx "source ${hpd_catkin}/install/setup.bash" /home/$user/.bashrc || echo "source ${hpd_catkin}/install/setup.bash" >> /home/$user/.bashrc
 source ${hpd_catkin}/install/setup.bash
 
 chown -R "$user" "$hpd_catkin"
