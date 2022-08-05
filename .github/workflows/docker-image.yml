@@ -38,12 +38,18 @@ jobs:
       with:
         platforms: arm64
     
-    - name: Build and Push
+    - name: Build and Push arm64
       uses: docker/build-push-action@v3.1.0
       with:
         file: ./Dockerfile
         push: true
-        platforms:
-          - linux/arm64
-          - linux/arm32v7
+        platforms: linux/arm64
         tags: hpdlidar/lidar:latest
+        
+    - name: Build and Push arm32
+      uses: docker/build-push-action@v3.1.0
+      with:
+        file: ./Dockerfile
+        push: true
+        platforms: linux/arm32v7
+        tags: hpdlidar/lidar:latest32
