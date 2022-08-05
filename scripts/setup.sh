@@ -30,4 +30,5 @@ fi
 apt update
 apt install -y podman
 
-docker pull hpdlidar/lidar:latest
+usermod -aG docker $user
+podman pull docker.io/hpdlidar/lidar:latest
