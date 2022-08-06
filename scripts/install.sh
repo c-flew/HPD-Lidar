@@ -46,7 +46,7 @@ set +e
 if [ ! $? -eq 0 ]; then
   pwd_tmp=$(pwd)
   mkdir -p /etc/ros/rosdep/sources.list.d/ && cd /etc/ros/rosdep/sources.list.d/
-  wget https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
+  curl -s https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
   cd $pwd_tmp
 fi
 set -e
