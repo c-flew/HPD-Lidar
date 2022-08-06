@@ -40,6 +40,15 @@ source /opt/ros/noetic/setup.bash
 apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
 [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
+
+# rosdep init fails on armhf docker
+if [ ! $? -eq 0 ]; then
+  pwd_tmp=pwd
+  mkdir -p /etc/ros/rosdep/sources.list.d/ && cd /etc/ros/rosdep/sources.list.d/
+  wget https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
+  cd $pwd_tmp
+fi
+
 su ${user} -c rosdep update
 
 
