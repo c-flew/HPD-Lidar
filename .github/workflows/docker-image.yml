@@ -52,5 +52,5 @@ jobs:
       with:
         file: ./Dockerfile
         push: true
-        platforms: linux/arm32v7
+        platforms: linux/arm/v7
         tags: hpdlidar/lidar:latest32
