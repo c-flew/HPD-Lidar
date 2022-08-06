@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image arm32
 
 on:
   push:
@@ -37,16 +37,8 @@ jobs:
     - name: Docker Setup QEMU
       uses: docker/setup-qemu-action@v2.0.0
       with:
-        platforms: arm64
+        platforms: arm/v7
     
-    - name: Build and Push arm64
-      uses: docker/build-push-action@v3.1.0
-      with:
-        file: ./Dockerfile
-        push: true
-        platforms: linux/arm64
-        tags: hpdlidar/lidar:latest
-        
     - name: Build and Push arm32
       uses: docker/build-push-action@v3.1.0
       with:
