@@ -51,7 +51,7 @@ if [ ! $? -eq 0 ]; then
 fi
 set -e
 
-su ${user} -c rosdep update
+su ${user} -c "rosdep update"
 
 
 hpd_catkin="${HPD_CATKIN_WS_DIR:-/home/$user/hpd_catkin_ws}"
