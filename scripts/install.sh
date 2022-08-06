@@ -40,7 +40,7 @@ source /opt/ros/noetic/setup.bash
 apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
 [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
-rosdep update
+su ${user} -c rosdep update
 
 
 hpd_catkin="${HPD_CATKIN_WS_DIR:-/home/$user/hpd_catkin_ws}"
