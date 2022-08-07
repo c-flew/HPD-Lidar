@@ -75,8 +75,9 @@ else
   curl -o libabsl20200923_0~20200923.3-2_armhf.deb http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl20200923_0~20200923.3-2_armhf.deb
   curl -o libabsl-dev_0~20200923.3-2_armhf.deb http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl-dev_0~20200923.3-2_armhf.deb
 
-  sudo apt install ./libabsl20200923_0~20200923.3-2_armhf.deb
-  sudo apt install ./libabsl-dev_0~20200923.3-2_armhf.deb
+  sudo apt install -y ./libabsl20200923_0~20200923.3-2_armhf.deb
+  sudo apt install -y ./libabsl-dev_0~20200923.3-2_armhf.deb
+  export absl_DIR=/usr/lib/arm-linux-gnueabihf/cmake/absl
 fi
 
 apt install google-mock libgmock-dev -y

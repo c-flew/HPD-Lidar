@@ -1,14 +1,11 @@
 FROM ubuntu:20.04
 
-ENV TZ=American/Chicago
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN \
   apt update && \
   apt upgrade -y && \
-  apt install -y sudo
+  apt install -y sudo tzdata
 
 ARG USER=pi
 RUN useradd -m -s /usr/bin/bash $USER
