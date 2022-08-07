@@ -67,8 +67,17 @@ which stow &> /dev/null || apt install stow -y
 which cmake &> /dev/null || apt install cmake -y
 
 cd ..
-rm -rf abseil-cpp
-sh src/cartographer/scripts/install_abseil.sh
+
+if [ $(getconf LONG_BIT) -eq 64 ]; then
+  rm -rf abseil-cpp
+  sh src/cartographer/scripts/install_abseil.sh
+else
+  curl -s http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl20210324_0~20210324.2-4_armhf.deb
+  curl -s http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl-dev_0~20210324.2-4_armhf.deb
+
+  sudo apt install ./libabsl20210324_0~20210324.2-4_armhf.deb
+  sudo apt install ./libabsl-dev_0~20210324.2-4_armhf.deb
+fi
 
 apt install google-mock libgmock-dev -y
 
