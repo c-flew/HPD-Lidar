@@ -72,8 +72,8 @@ if [ $(getconf LONG_BIT) -eq 64 ]; then
   rm -rf abseil-cpp
   sh src/cartographer/scripts/install_abseil.sh
 else
-  curl -s http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl20210324_0~20210324.2-4_armhf.deb
-  curl -s http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl-dev_0~20210324.2-4_armhf.deb
+  curl -o libabsl20210324_0~20210324.2-4_armhf.deb http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl20210324_0~20210324.2-4_armhf.deb
+  curl -o libabsl-dev_0~20210324.2-4_armhf.deb http://ftp.us.debian.org/debian/pool/main/a/abseil/libabsl-dev_0~20210324.2-4_armhf.deb
 
   sudo apt install ./libabsl20210324_0~20210324.2-4_armhf.deb
   sudo apt install ./libabsl-dev_0~20210324.2-4_armhf.deb
