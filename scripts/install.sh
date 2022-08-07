@@ -39,21 +39,11 @@ source /opt/ros/noetic/setup.bash
 
 apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 
-set +e
-[ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
-ret=$?
-set -e
-# rosdep init fails on armhf docker
-if [ $ret -ne 0 ]; then
-  pwd_tmp=$(pwd)
-  mkdir -p /etc/ros/rosdep/sources.list.d/ && cd /etc/ros/rosdep/sources.list.d/
-  curl -s https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list
-  cd $pwd_tmp
+apt install -y ca-cacert
+c_rehash /etc/ssl/certs
+update-ca-certificates
 
-  # for debugging
-  ls /etc/ros/rosdep/sources.list.d
-  cat /etc/ros/rosdep/sources.list.d/20-default.list
-fi
+[ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
 
 su ${user} -c "rosdep update"
 
