@@ -45,7 +45,7 @@ update-ca-certificates
 
 [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ] && rosdep init
 
-su ${user} -c "rosdep update"
+rosdep update
 
 
 hpd_catkin="${HPD_CATKIN_WS_DIR:-/home/$user/hpd_catkin_ws}"
