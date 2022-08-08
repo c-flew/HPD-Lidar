@@ -3,12 +3,11 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN \
-  apt remove -y --purge *gnome* && \
+  apt update && \
+  apt upgrade -y && \
   apt clean && \
   apt autoclean && \
   apt autoremove && \
-  apt update && \
-  apt upgrade -y && \
   apt install -y sudo tzdata && \
   rm -rf /var/lib/apt/lists/*
 
@@ -30,6 +29,7 @@ ADD ./scripts/install.sh install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
 RUN \
+  apt remove -y --purge *gnome* && \
   apt clean && \
   apt autoclean && \
   auto autoremove && \
