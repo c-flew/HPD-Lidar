@@ -29,10 +29,10 @@ ADD ./scripts/install.sh install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
 RUN \
-  apt clean && \
-  apt autoclean && \
-  auto autoremove && \
-  rm -rf /var/lib/apt/lists/*
+  sudo apt clean && \
+  sudo apt autoclean && \
+  sudo auto autoremove && \
+  sudo rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD ["source", "/opt/ros/noetic/setup.bash", "&&", "source", "/home/pi/hpd_catkin_ws/install/setup.bash", "&&", "roslaunch", "gbot_core", "gbot.launch"]
