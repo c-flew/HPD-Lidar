@@ -19,7 +19,7 @@ chown -R "$user" HPD-Lidar
 
 which uhubctl &> /dev/null || apt install uhubctl -y
 
-apt install -y docker.io containerd runc
+apt install -y docker.io containerd crun
 
 if search=$(awk -F= '/^NAME/{print $2}' /etc/os-release | grep -i "ubuntu"); then
   source /etc/os-release
