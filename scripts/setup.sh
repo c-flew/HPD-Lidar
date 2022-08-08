@@ -35,3 +35,6 @@ podman pull docker.io/hpdlidar/lidar:latest
 
 systemctl disable docker
 systemctl stop docker
+
+systemctl disable containerd
+systemctl stop containerd
