@@ -35,7 +35,7 @@ apt update
 
 echo "HPD-Lidar: installing ros noetic"
 # TODO: check how bare bones we can get in the future
-apt install -y ros-noetic-desktop
+apt install -y ros-noetic-ros-base
 
 source /opt/ros/noetic/setup.bash
 

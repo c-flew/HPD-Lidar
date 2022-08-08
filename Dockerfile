@@ -29,7 +29,6 @@ ADD ./scripts/install.sh install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
 RUN \
-  apt remove -y --purge *gnome* && \
   apt clean && \
   apt autoclean && \
   auto autoremove && \
