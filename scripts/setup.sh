@@ -32,3 +32,6 @@ apt install -y podman
 
 usermod -aG docker $user
 podman pull docker.io/hpdlidar/lidar:latest
+
+systemctl disable docker
+systemctl stop docker
