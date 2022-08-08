@@ -3,7 +3,6 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN \
-  apt remove -y --purge pulseaudio libbluray2 mercurial mercurial-common && \
   apt remove -y --purge *gnome* && \
   apt clean && \
   apt autoclean && \
