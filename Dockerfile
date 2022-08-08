@@ -24,4 +24,4 @@ ADD ./scripts/install.sh install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
 ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["roslaunch", "gbot_core", "gbot.launch"]
+CMD ["source", "/opt/ros/noetic/setup.bash", "&&", "source", "/home/pi/hpd_catkin_ws/install/setup.bash", "&&", "roslaunch", "gbot_core", "gbot.launch"]
