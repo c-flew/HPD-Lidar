@@ -23,4 +23,5 @@ WORKDIR /home/$USER
 ADD ./scripts/install.sh install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
-CMD ["bash", "-c", "roslaunch", "gbot_core", "gbot.launch"]
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["roslaunch", "gbot_core", "gbot.launch"]
