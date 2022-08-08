@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  PLATFORMS: ${{ 'linux/arm64,linux/armhf' }}
+  PLATFORMS: ${{ 'linux/arm64' }}
 
 jobs:
 
