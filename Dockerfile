@@ -31,7 +31,7 @@ RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 RUN \
   sudo apt clean && \
   sudo apt autoclean && \
-  sudo auto autoremove && \
+  sudo apt autoremove && \
   sudo rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/bin/bash", "-c"]
