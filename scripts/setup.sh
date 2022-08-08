@@ -9,6 +9,8 @@ fi
 
 user=${SUDO_USER:-${whoami}}
 
+apt update
+
 which git &> /dev/null || apt install git -y
 
 git -C HPD-Lidar pull || git clone https://github.com/c-flew/HPD-Lidar

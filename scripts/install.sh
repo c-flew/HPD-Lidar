@@ -15,6 +15,8 @@ fi
 TMP_DF=$DEBIAN_FRONTEND
 export DEBIAN_FRONTEND=noninteractive
 
+apt update
+
 which lsb_release &> /dev/null || apt install lsb-release -y
 dpkg-query -l | grep build-essential || apt install -y build-essential
 
