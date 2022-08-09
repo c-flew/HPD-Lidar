@@ -35,4 +35,6 @@ RUN \
   sudo rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["source", "/opt/ros/noetic/setup.bash", "&&", "source", "/home/pi/hpd_catkin_ws/install/setup.bash", "&&", "roslaunch", "gbot_core", "gbot.launch"]
+CMD source /opt/ros/noetic/setup.bash && \
+    source /home/pi/hpd_catkin_ws/install/setup.bash && \
+    roslaunch gbot_core gbot.launch
