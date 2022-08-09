@@ -16,4 +16,4 @@ getdevice() {
 device=/dev/$(getdevice 10c4:ea60)
 ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
 
-exec podman --runtime $(which crun) run --network host --device $device -e ROS_IP=$ip -it --rm lidar $@
+exec podman --runtime $(which crun) run --network host --device $device -e ROS_IP=$ip -it --rm lidar "source /opt/ros/noetic/setup.bash && source /home/pi/hpd_catkin_ws/install/setup.bash && roslaunch gbot_core gbot.launch"
