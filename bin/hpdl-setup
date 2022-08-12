@@ -33,7 +33,12 @@ apt update
 apt install -y podman
 
 usermod -aG docker $user
-podman pull docker.io/hpdlidar/lidar:latest
+
+if [ $(getconf LONG_BIT) -eq 64 ]; then
+  podman pull docker.io/hpdlidar/lidar:latest
+else
+  podman pull docker.io/hpdlidar/lidar:latest32
+fi
 
 systemctl disable docker
 systemctl stop docker
