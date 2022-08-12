@@ -5,12 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'Dockerfile'
-      - 'scripts/install.sh'
+      - 'bin/hpdl-install'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'Dockerfile'
-      - 'scripts/install.sh'
+      - 'bin/hpdl-install'
   workflow_dispatch:
 
 env:

@@ -25,7 +25,7 @@ WORKDIR /home/$USER
 
 ENV ROS_DISTRO noetic
 
-ADD ./scripts/install.sh install.sh
+ADD ./bin/hpdl-install install.sh
 RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
 
 RUN \

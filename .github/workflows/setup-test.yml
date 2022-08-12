@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'scripts/setup.sh'
+      - 'bin/hpdl-setup'
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'scripts/setup.sh'
+      - 'bin/hpdl-setup'
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
     
     - name: Setup
       shell: bash
-      run: sudo bash scripts/setup.sh
+      run: sudo bash bin/hpdl-setup
