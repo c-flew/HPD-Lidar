@@ -14,7 +14,7 @@ apt update
 which git &> /dev/null || apt install git -y
 
 git -C HPD-Lidar pull || git clone https://github.com/c-flew/HPD-Lidar
-chmod +x HPD-Lidar/scripts/*.sh
+chmod +x HPD-Lidar/bin/*
 chown -R "$user" HPD-Lidar
 
 which uhubctl &> /dev/null || apt install uhubctl -y
