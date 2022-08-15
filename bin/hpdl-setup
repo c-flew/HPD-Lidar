@@ -8,17 +8,20 @@ if [ $(id -u) -ne 0 ]; then
 fi
 
 user=${SUDO_USER:-${whoami}}
+cd /home/$user
 
 apt update
 
 which git &> /dev/null || apt install git -y
 
 git -C HPD-Lidar pull || git clone https://github.com/c-flew/HPD-Lidar
-chmod +x HPD-Lidar/bin/*
 chown -R "$user" HPD-Lidar
+chmod +x HPD-Lidar/bin/*
+cp HPD-Lidar/bin/* /home/$user/.local/bin/
 
 which uhubctl &> /dev/null || apt install uhubctl -y
 
+dpkg-query -l | grep docker.io || export DOCKER_INSTALLED=0
 apt install -y docker.io containerd runc crun
 
 if search=$(awk -F= '/^NAME/{print $2}' /etc/os-release | grep -i "ubuntu"); then
@@ -40,8 +43,11 @@ else
   podman pull docker.io/hpdlidar/lidar:latest32
 fi
 
-systemctl disable docker
-systemctl stop docker
+if [ ! -z $DOCKER_INSTALLED ]; then
+  systemctl disable docker
+  systemctl stop docker
 
-systemctl disable containerd
-systemctl stop containerd
+  systemctl disable containerd
+  systemctl stop containerd
+fi
+unset DOCKER_INSTALLED
