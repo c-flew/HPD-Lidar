@@ -1,8 +1,2 @@
 # HPD-Lidar
-Using gbot_core (Cartographer)
-
-
-
-
-
-have rplidar_ros (Hector SLAM)
+Set of scripts to facilitate the installation and usage of gbot_core (cartogapher and rplidar_ros)
