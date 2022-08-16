@@ -5,9 +5,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   apt update && \
   apt upgrade -y && \
-  apt clean && \
-  apt autoclean && \
-  apt autoremove && \
   apt install -y sudo tzdata && \
   rm -rf /var/lib/apt/lists/*
 
@@ -26,7 +23,8 @@ WORKDIR /home/$USER
 ENV ROS_DISTRO noetic
 
 ADD ./bin/hpdl-install install.sh
-RUN su pi -c "sudo bash install.sh" # TODO: make this cleaner
+# TODO: make this cleaner
+RUN su pi -c "sudo bash install.sh" && rm install.sh
 
 RUN \
   sudo apt clean && \
@@ -36,5 +34,5 @@ RUN \
 
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD source /opt/ros/noetic/setup.bash && \
-    source /home/pi/hpd_catkin_ws/install/setup.bash && \
+    source /opt/hpdlidar/setup.bash && \
     roslaunch gbot_core gbot.launch

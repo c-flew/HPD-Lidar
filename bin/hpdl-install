@@ -2,9 +2,7 @@
 
 
 set -e
-
-# TODO: dont print echo stuff
-set -o xtrace
+set -o verbose
 
 
 if [ $(id -u) -ne 0 ]; then
@@ -88,16 +86,17 @@ fi
 apt install google-mock libgmock-dev -y
 
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y -r
-catkin_make_isolated --install --install-space ./install --use-ninja -DCMAKE_BUILD_TYPE=Release
+catkin_make_isolated --install --install-space /opt/hpdlidar --use-ninja -DCMAKE_BUILD_TYPE=Release
 cd ..
+
+rm -rf $hpd_catkin
 
 
 touch ~/.bashrc
 grep -qxF "source /opt/ros/noetic/setup.bash" /home/$user/.bashrc || echo "source /opt/ros/noetic/setup.bash" >> /home/$user/.bashrc
-grep -qx "source ${hpd_catkin}/install/setup.bash" /home/$user/.bashrc || echo "source ${hpd_catkin}/install/setup.bash" >> /home/$user/.bashrc
-source ${hpd_catkin}/install/setup.bash
+grep -qx "source /opt/hpdlidar/setup.bash" /home/$user/.bashrc || echo "source /opt/hpdlidar/setup.bash" >> /home/$user/.bashrc
+source /opt/hpdlidar/setup.bash
 
-chown -R "$user" "$hpd_catkin"
 
 which uhubctl &> /dev/null || apt install uhubctl -y
 export DEBIAN_FRONTEND=$TMP_DF
