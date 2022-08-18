@@ -8,16 +8,17 @@ if [ $(id -u) -ne 0 ]; then
 fi
 
 user=${SUDO_USER:-${whoami}}
-cd /home/$user
 
 apt update
 
 which git &> /dev/null || apt install git -y
 
+cd /tmp
 git -C HPD-Lidar pull || git clone https://github.com/c-flew/HPD-Lidar
 chown -R "$user" HPD-Lidar
 chmod +x HPD-Lidar/bin/*
 mkdir -p /home/$user/.local/bin && cp HPD-Lidar/bin/* /home/$user/.local/bin/
+rm -rf HPD-Lidar
 
 which uhubctl &> /dev/null || apt install uhubctl -y
 
