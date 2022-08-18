@@ -48,7 +48,7 @@ update-ca-certificates
 rosdep update
 
 
-hpd_catkin="${HPD_CATKIN_WS_DIR:-/home/$user/hpd_catkin_ws}"
+hpd_catkin="${HPD_CATKIN_WS_DIR:-/tmp/hpd_catkin_ws}"
 echo "HPD-Lidar: using catkin ws directory: ${hpd_catkin}"
 mkdir -p $hpd_catkin/src && cd $hpd_catkin/src
 
